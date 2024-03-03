@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add employee</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<form method="POST" th:action="@{/employees/add}" th:object="${employee}">
+    <div class="form-group">
+        <label for="first_name">First name</label>
+        <input style="width: 40%" type="text" id="first_name" class="form-control" th:field="*{firstName}"/>
+        <p style="color:red"
+           th:if="${#fields.hasErrors('firstName')}"
+           th:errors="*{firstName}">
+        </p>
+    </div>
+    <div class="form-group">
+        <label for="last_name">Last name</label>
+        <input style="width: 40%" type="text" id="last_name" class="form-control" th:field="*{lastName}"/>
+        <p style="color:red"
+           th:if="${#fields.hasErrors('lastName')}"
+           th:errors="*{lastName}">
+        </p>
+    </div>
+    <div class="form-group">
+        <label for="position">Position</label>
+        <select style="width: 40%" id="position" class="form-control" th:field="*{position}">
+            <option th:each="position : ${T(ru.sber.spring_mvc.model.Position).values()}"
+                    th:value="${position}"
+                    th:text="${position.getPositionTitle()}">
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="salary">Salary</label>
+        <input style="width: 40%" type="text" id="salary" class="form-control" th:field="*{salary}"/>
+        <p style="color:red"
+           th:if="${#fields.hasErrors('salary')}"
+           th:errors="*{salary}">
+        </p>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input style="width: 40%" type="text" id="email" class="form-control" th:field="*{email}"/>
+        <p style="color:red"
+           th:if="${#fields.hasErrors('email')}"
+           th:errors="*{email}">
+        </p>
+    </div>
+    <div class="form-group">
+        <label for="phone_number">Phone number</label>
+        <input style="width: 40%" type="text" id="phone_number" class="form-control" th:field="*{phoneNumber}"/>
+        <p style="color:red"
+           th:if="${#fields.hasErrors('phoneNumber')}"
+           th:errors="*{phoneNumber}">
+        </p>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+</body>
+</html>
